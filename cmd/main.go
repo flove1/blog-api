@@ -1,9 +1,10 @@
 package main
 
 import (
-	"api-blog/internal/app"
-	"api-blog/internal/config"
 	"fmt"
+
+	"github.com/Tilvaldiyev/blog-api/internal/app"
+	"github.com/Tilvaldiyev/blog-api/internal/config"
 )
 
 func main() {
@@ -12,7 +13,7 @@ func main() {
 		panic(err)
 	}
 
-	fmt.Println(fmt.Sprintf("%#v", cfg))
+	fmt.Printf("%#v", cfg)
 
 	err = app.Run(cfg)
 	if err != nil {

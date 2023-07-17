@@ -1,14 +1,15 @@
 package app
 
 import (
-	"api-blog/internal/config"
-	"api-blog/internal/handler"
-	"api-blog/internal/repository/pgrepo"
-	"api-blog/internal/service"
-	"api-blog/pkg/httpserver"
 	"log"
 	"os"
 	"os/signal"
+
+	"github.com/Tilvaldiyev/blog-api/internal/config"
+	"github.com/Tilvaldiyev/blog-api/internal/handler"
+	"github.com/Tilvaldiyev/blog-api/internal/repository/pgrepo"
+	"github.com/Tilvaldiyev/blog-api/internal/service"
+	"github.com/Tilvaldiyev/blog-api/pkg/httpserver"
 )
 
 func Run(cfg *config.Config) error {
@@ -26,7 +27,7 @@ func Run(cfg *config.Config) error {
 	log.Println("connection success")
 
 	srvs := service.New(db, cfg)
-	hndlr := handler.New(srvs)
+	hndlr := handler.New(srvs, cfg)
 	server := httpserver.New(
 		hndlr.InitRouter(),
 		httpserver.WithPort(cfg.HTTP.Port),
@@ -35,8 +36,8 @@ func Run(cfg *config.Config) error {
 		httpserver.WithShutdownTimeout(cfg.HTTP.ShutdownTimeout),
 	)
 
-	log.Println("server started")
 	server.Start()
+	log.Println("server started")
 
 	interrupt := make(chan os.Signal, 1)
 	signal.Notify(interrupt, os.Interrupt)

@@ -3,11 +3,15 @@ package pgrepo
 import (
 	"context"
 	"fmt"
-	"github.com/jackc/pgx/v4/pgxpool"
 	"net/url"
+
+	"github.com/jackc/pgx/v4/pgxpool"
 )
 
 const usersTable = "users"
+const articlesTable = "articles"
+const articlesCategoriesTable = "articles_categories"
+const categoriesTable = "categories"
 
 type Postgres struct {
 	host     string

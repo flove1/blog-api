@@ -1,13 +1,18 @@
 package handler
 
-import "api-blog/internal/service"
+import (
+	"github.com/Tilvaldiyev/blog-api/internal/config"
+	"github.com/Tilvaldiyev/blog-api/internal/service"
+)
 
 type Handler struct {
-	srvs service.Service
+	Srvs   service.Service
+	Config *config.Config
 }
 
-func New(srvs service.Service) *Handler {
+func New(srvs service.Service, config *config.Config) *Handler {
 	return &Handler{
-		srvs: srvs,
+		Srvs:   srvs,
+		Config: config,
 	}
 }

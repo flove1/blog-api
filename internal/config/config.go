@@ -1,8 +1,9 @@
 package config
 
 import (
-	"github.com/ilyakaznacheev/cleanenv"
 	"time"
+
+	"github.com/ilyakaznacheev/cleanenv"
 )
 
 type Config struct {
@@ -16,6 +17,7 @@ type ServerConfig struct {
 	ShutdownTimeout time.Duration `yaml:"shutdown_timeout"`
 	ReadTimeout     time.Duration `yaml:"read_timeout"`
 	WriteTimeout    time.Duration `yaml:"write_timeout"`
+	SigningKey      []byte        `env:"SIGNING_KEY" env-required:"true"`
 }
 
 type DBConfig struct {
@@ -35,6 +37,9 @@ func InitConfig(path string) (*Config, error) {
 	}
 
 	err = cleanenv.ReadEnv(cfg)
+	if err != nil {
+		return nil, err
+	}
 
 	return cfg, nil
 }
