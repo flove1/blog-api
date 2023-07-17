@@ -207,7 +207,7 @@ func (p *Postgres) UpdateArticle(ctx context.Context, a *entity.Article) error {
 	query := fmt.Sprintf(`
 		UPDATE %s SET
 			title = COALESCE(NULLIF($2, ''), title),
-			description = $3)
+			description = $3
 		WHERE 
 			id = $1 AND
 			user_id = $4

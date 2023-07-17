@@ -8,7 +8,8 @@ import (
 
 type Repository interface {
 	CreateUser(ctx context.Context, u *entity.User) error
-	Login(ctx context.Context, username, password string) (*entity.User, error)
+	GetUserByUsername(ctx context.Context, username string) (*entity.User, error)
+
 	UpdateUser(ctx context.Context, u *entity.User) error
 	DeleteUser(ctx context.Context, userID int64) error
 

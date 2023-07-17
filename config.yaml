@@ -10,3 +10,6 @@ db:
   port: '5432'
   db_name: 'blog_db'
   username: 'postgres'
+
+auth:
+  token_expiration: '60m'

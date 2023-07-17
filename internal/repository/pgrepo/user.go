@@ -26,7 +26,7 @@ func (p *Postgres) CreateUser(ctx context.Context, u *entity.User) error {
 	return nil
 }
 
-func (p *Postgres) Login(ctx context.Context, username, password string) (*entity.User, error) {
+func (p *Postgres) GetUserByUsername(ctx context.Context, username string) (*entity.User, error) {
 	query := fmt.Sprintf(`
 			SELECT 
 				id,

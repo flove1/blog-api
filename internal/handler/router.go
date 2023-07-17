@@ -7,10 +7,10 @@ func (h *Handler) InitRouter() *gin.Engine {
 
 	v1 := router.Group("/api/v1")
 	userV1 := v1.Group("/user")
-	articleV1 := v1.Group("/article", authenticate(h.Config))
+	articleV1 := v1.Group("/article")
 	categoryV1 := v1.Group("/category")
 
-	auth := authenticate(h.Config)
+	auth := authenticationMiddleware(h.Config)
 
 	userV1.POST("/register", h.createUser)
 	userV1.POST("/login", h.login)

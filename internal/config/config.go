@@ -9,6 +9,7 @@ import (
 type Config struct {
 	HTTP ServerConfig `yaml:"http"`
 	DB   DBConfig     `yaml:"db"`
+	AUTH AuthConfig   `yaml:"auth"`
 }
 
 type ServerConfig struct {
@@ -17,7 +18,11 @@ type ServerConfig struct {
 	ShutdownTimeout time.Duration `yaml:"shutdown_timeout"`
 	ReadTimeout     time.Duration `yaml:"read_timeout"`
 	WriteTimeout    time.Duration `yaml:"write_timeout"`
-	SigningKey      []byte        `env:"SIGNING_KEY" env-required:"true"`
+}
+
+type AuthConfig struct {
+	TokenExpiration time.Duration `yaml:"token_expiration"`
+	SigningKey      string        `env:"SIGNING_KEY" env-required:"true"`
 }
 
 type DBConfig struct {
